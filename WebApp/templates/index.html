@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+</head>
+<style>
+        body {
+                padding: 0;
+                margin: 0;
+                background-image: url('/static/background/ClaudMonet.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: fixed;
+                font-family: 'Rubik', sans-serif;
+        }
+        .flex {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+        }
+
+        .uploader{
+                background-color: white;
+                border-radius: 10px;
+                width: 300px;
+                height: 300px;
+                padding: 1em;
+                justify-content: center;
+        }
+
+        .uploader h2{
+                font-weight: normal;
+        }
+        .center{
+                position: relative;
+                margin-top: 30vh;
+                left: auto;
+        }
+        .title{
+                color: white;
+                margin-left: 15px;
+                margin-top: 2em;
+        }
+        .title h1{
+                font-size: 8em;
+                padding: 0;
+                margin: 0;
+                
+               
+        }
+        .title h2{
+                font-size: 3em;
+                padding: 0;
+                margin: 0;
+                font-weight: 100;
+        }
+        .img-fluid{
+                width: 50px;
+                height: 50px;
+        }
+
+        .align-center{
+                vertical-align: center;
+                align-items: center;
+        }
+        .ml{
+                margin-left: 0.5em;
+        }
+
+        .hidden{
+                display: none;
+        }
+
+        .btn{
+                position: absolute;
+                bottom: 2em;
+                border-color: black;
+                border-radius: 20px;
+                background-color: white;
+                padding: 0.5em 1em;
+                cursor: pointer;
+                font-size: 1.5em;
+                font-weight: bold;
+                transition: 0.7s;
+               
+        }
+        .btn:hover{
+                background-color: black;
+                color: white;
+                transition: 0.7s;
+        }
+        .relative{
+                position: relative;
+        }
+        .margin-top{
+                margin-top: 30%;
+        }
+
+        .loading img{
+                width: 100%;
+        }
+
+</style>
+<body>  
+        <div class="flex center">
+                <div class="uploader  relative  ">
+                        <div class="  flex align-center margin-top toHide" id="addButton">
+                                <img  class="img-fluid align-center" src="../static/background/plus.png" />
+                                <h2 class="ml">Upload a Picture</h2>
+                                <span id="nameOfInput"></span>
+                                
+                        </div>  
+                        <div class="flex align-center toHide">
+                                <button id="generate" class="btn">Generate</button>
+                        </div>
+                      
+                        <form class="hidden" method=post enctype=multipart/form-data>
+                                <input type=file name=file class="">
+                                <input type=submit value=Upload>
+                        </form>
+
+                        <div class="loading hidden margin-top">
+                                <img src="../static/background/loading.gif" />
+                        </div>
+        
+                </div>
+                <div class="title">
+                        <h1 class="bigTitle">Deep Monet</h1>
+                        <h2>CycleGan Pictures2Paintings</h2>
+                </div>
+                
+        </div>
+       
+        <script>
+                document.getElementById('addButton').addEventListener("click", function(){
+                        getName();
+                        let input = document.querySelector('input[type="file"]')
+                        input.click();
+                        input.addEventListener('change', function (e) {
+                                console.log( getName());
+                                document.getElementById('nameOfInput').innerHTML= "Current image : " + getName();
+                        });     
+                });
+                document.getElementById('generate').addEventListener("click", function(){
+                        
+                        let elToHide = document.getElementsByClassName('toHide');
+                        for (let i = 0; i < elToHide.length; i++) {
+                                elToHide[i].classList.add('hidden');
+                        }
+                        document.getElementsByClassName('loading')[0].classList.remove('hidden');
+                        let submit = document.querySelector('input[type="submit"]') ;
+                        submit.click();    
+                })
+                function getName(){
+                        var fullPath = document.querySelector('input[type="file"]').value;
+                        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                        var filename = fullPath.substring(startIndex);
+                        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                                filename = filename.substring(1);
+                        }
+                        return filename;
+                }
+        </script>
+       
+</body>
+</html>
