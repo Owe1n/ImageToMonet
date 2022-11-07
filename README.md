@@ -5,7 +5,7 @@ The aim of this project was to explore CycleGANs on the task of image transforma
 
 ## Related work
 
-[Documentation](https://github.com/Owe1n/ImageToMonet/ReportOnImageToMonet.pdf)
+[Report](https://github.com/Owe1n/ImageToMonet/blob/master/ReportOnImageToMonet.pdf)
 
 
 ## Before executing the WebApp
